@@ -3,106 +3,49 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Smart Guardian</title>
-    <link rel="stylesheet" href="styles.css">
-    <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@400;600&display=swap" rel="stylesheet">
-    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <title>Health Dashboard</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class="wrapper">
-        <div class="nav">
-            <div class="logo">
-                <h4>Smart Guardian</h4>
+    <div class="dashboard">
+        <header class="header">
+            <h1>Overview Conditions</h1>
+            <div class="search-bar">
+                <input type="text" placeholder="Search...">
             </div>
-            <div class="links">
-                <a href="register.html">Register</a>
-                <a href="#">Login</a>
-            </div>
-        </div>
+        </header>
 
-        <!-- LANDING PAGE -->
+        <aside class="sidebar">
+            <ul>
+                <li class="active"><span>❤️</span> My Heart</li>
+                <li><span>📋</span> Reports</li>
+                <li><span>⚙️</span> Settings</li>
+            </ul>
+        </aside>
 
-        <div class="landing">
-            <div class="landingText" data-aos="fade-up" data-aos-duration="1000">
-                <h1>Take Care of your loved ones wherever you are.<span style="color:#e0501b"></span> </h1>
-                <h3>Start monitoring them now.<br> Register or Login here.</h3>
-               <div class="landingText">
-                   <div class="btn-container">
-                       <div class="btn">
-                            <a href="register.html">Register</a>
-                        </div>
-                    <div class="btn">
-                            <a href="#">Login</a>
-                        </div>
+        <main class="content">
+            <div class="card heart-section">
+                <div class="heart-image">
+                    <img src="heart.png" alt="Heart">
+                </div>
+                <div class="heart-stats">
+                    <div class="stat">
+                        <p>Blood Status</p>
+                        <h2>116/70</h2>
+                    </div>
+                    <div class="stat">
+                        <p>Heart Rate</p>
+                        <h2>120 bpm</h2>
                     </div>
                 </div>
-
             </div>
-            <div class="landingImage" data-aos="fade-down" data-aos-duration="2000">
-                <img src="img/bg.png" alt="">
-            </div>
-        </div>
 
-        <!-- ABOUT SECTION -->
-
-        <div class="about">
-            <div class="aboutText" data-aos="fade-up" data-aos-duration="1000">
-                <h1>History of<br> <span style="color:#2f8be0;font-size:3vw">Smart Guardian</span> </h1>
-                <img src="img/doctor-woman-400px.png" alt="">
+            <div class="schedule-section">
+                <h3>My Schedule</h3>
+                <p>Next Checkup: <strong>Fri, 24 Mar</strong></p>
+                <button>Consult Now</button>
             </div>
-            <div class="aboutList" data-aos="fade-left" data-aos-duration="1000">
-                <ol>
-                    <li> 
-                        <span>01</span>
-                         <p>Covid-19, which is now a fast growing global pandemic. The number of confirmed cases worldwide has exceeded 25,65,000 due to rapid spreading of the virus.</p>
-                    </li>
-                    <li> 
-                        <span>02</span>
-                         <p>Covid-19, spreads very easily, much easier than many other regular illnesses we deal with on a regular basis. That's what makes it so dangerous.</p>
-                    </li>
-                    <li> 
-                        <span>03</span>
-                         <p>The best course of action is to stay at home prevent the spread of the disease as well as hospitals getting overwhelmed with patients who simply shoudn't be there.</p>
-                    </li>
-                    <li> 
-                        <span>04</span>
-                         <p>As of today, there is no know cure and no approved vaccine for Covid-19</p>
-                    </li>
-
-                </ol>
-            </div>
-        </div>
-
-        <!-- BANNER AND FOOTER -->
-
-        <div class="banner">
-            <div class="bannerText" data-aos="fade-right" data-aos-duration="1000">
-                <h1>Download the HealthCare App Today. <br> <span style="font-size:1.6vw;font-weight:normal"  class="bannerInnerText">
-                    Stay Updated and get all your medical needs taken care of!
-                </span> </h1>
-                <a href="#"> <img src="img/AndroidPNG.png" alt=""> </a>
-                <a href="#"> <img src="img/iosPNG.png" alt=""> </a>
-            </div>
-            <div class="bannerImg" data-aos="fade-up" data-aos-duration="1000">
-                <img src="img/MobileApp.png" alt="">
-            </div>
-        </div>
-
-        <div class="footer">
-            <h2>HealthCare.</h2>
-            <div class="footerlinks">
-                <a href="#" class="mainlink">Corona Updates</a>
-                <a href="#">Help</a>
-                <a href="#">About</a>
-                <a href="#">Contact</a>
-            </div>
-        </div>
+        </main>
     </div>
-
-    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-    <script>
-            AOS.init();
-    </script>
 </body>
 </html>
