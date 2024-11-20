@@ -72,15 +72,15 @@ html,body{
 /* Container for the buttons */
 .landingText .btn-container {
     display: flex; /* Align items side by side */
-    justify-content: center; /* Center buttons horizontally (optional) */
+    justify-content: flex-start; /* Center buttons horizontally (optional) */
     gap: 20px; /* Space between the buttons */
     margin-top: 30px; /* Adjust vertical spacing above the buttons */
 }
 
 /* Button styles */
 .landingText .btn {
-    width: 120px; /* Fixed width for uniform button size */
-    padding: 14px 0; /* Vertical padding only */
+    width: 150px; /* Fixed width for uniform button size */
+    padding: 16px 0; /* Vertical padding only */
     background-color: #2f8be0; /* Blue background */
     border-radius: 45px; /* Fully rounded edges */
     text-align: center;
@@ -90,7 +90,7 @@ html,body{
 
 /* Link styles inside the button */
 .landingText .btn a {
-    font-size: 1.2vw; /* Responsive font size */
+    font-size: 1.5vw; /* Responsive font size */
     color: #fff; /* White text */
     text-decoration: none; /* Removes underline */
 }
