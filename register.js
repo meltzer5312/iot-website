@@ -6,20 +6,6 @@ document.addEventListener("DOMContentLoaded", () => {
     const errorMessage = document.getElementById("errorMessage");
     const registerForm = document.getElementById("registerForm");
 
-    // Password requirement elements
-    const numberRequirement = document.getElementById("numberRequirement");
-    const specialCharRequirement = document.getElementById("specialCharRequirement");
-    const uppercaseRequirement = document.getElementById("uppercaseRequirement");
-    const lowercaseRequirement = document.getElementById("lowercaseRequirement");
-
-    // Password validation regex
-    const regex = {
-        number: /\d/,
-        specialChar: /[!@#$%^&*(),.?":{}|<>]/,
-        uppercase: /[A-Z]/,
-        lowercase: /[a-z]/,
-    };
-
     // AWS Cognito Configuration
     const cognitoConfig = window.config.cognito;
 
@@ -27,6 +13,20 @@ document.addEventListener("DOMContentLoaded", () => {
         UserPoolId: cognitoConfig.userPoolId,
         ClientId: cognitoConfig.userPoolClientId,
     });
+
+    // Password requirement elements
+    const numberRequirement = document.getElementById("numberRequirement");
+    const specialCharRequirement = document.getElementById("specialCharRequirement");
+    const uppercaseRequirement = document.getElementById("uppercaseRequirement");
+    const lowercaseRequirement = document.getElementById("lowercaseRequirement");
+
+    // Regular expressions for validation
+    const regex = {
+        number: /\d/,
+        specialChar: /[!@#$%^&*(),.?":{}|<>]/,
+        uppercase: /[A-Z]/,
+        lowercase: /[a-z]/,
+    };
 
     // Update password requirement validation dynamically
     passwordInput.addEventListener("input", () => {
@@ -91,7 +91,7 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     });
 
-    // Toggle requirement validity
+    // Function to toggle the "valid" class
     function toggleRequirement(element, isValid) {
         if (isValid) {
             element.classList.add("valid");
