@@ -68,19 +68,38 @@ html,body{
     line-height: 30px;
 }
 
-.landingText .btn{
-    width: 120px;
-    margin-top: 30px;
-    padding: 14px 20px 14px 20px;
-    background-color: #2f8be0;
-    border-radius: 45px;
-    text-align: center
+
+/* Container for the buttons */
+.landingText .btn-container {
+    display: flex; /* Aligns items side by side */
+    justify-content: center; /* Centers buttons horizontally (optional) */
+    gap: 20px; /* Spacing between the buttons */
+    margin-top: 30px; /* Adjust spacing above buttons */
 }
 
-.landingText .btn a{
-    font-size: 1.2vw;
-    color: #fff;
+/* Button styles */
+.landingText .btn {
+    width: auto; /* Allows the button width to adjust to its content */
+    padding: 14px 20px; /* Uniform padding for better readability */
+    background-color: #2f8be0; /* Button background color */
+    border-radius: 45px; /* Makes buttons rounded */
+    text-align: center;
+    cursor: pointer; /* Adds a pointer cursor on hover */
+    transition: background-color 0.3s ease; /* Smooth hover transition */
 }
+
+/* Link styles inside the button */
+.landingText .btn a {
+    font-size: 1.2vw; /* Responsive font size */
+    color: #fff; /* White text color */
+    text-decoration: none; /* Removes underline from the link */
+}
+
+/* Hover effect */
+.landingText .btn:hover {
+    background-color: #1d6fb8; /* Darker shade of blue on hover */
+}
+
 
 .landingImage img{
     width: 28vw;
