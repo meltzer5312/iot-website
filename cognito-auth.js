@@ -8,6 +8,8 @@ var AuthApp = window.AuthApp || {};
     };
 
     const signinUrl = '/signin.html';
+    const verifyUrl = '/verify.html';
+    const dashboardUrl = '/index.html';
 
     const poolData = {
         UserPoolId: _config.cognito.userPoolId,
@@ -54,17 +56,23 @@ var AuthApp = window.AuthApp || {};
     });
 
     /*
-     * Cognito User Pool functions
+     * Cognito User Pool Functions
      */
-    function register(email, password, onSuccess, onFailure) {
+    function register(email, password, name, onSuccess, onFailure) {
         const attributeList = [];
         const dataEmail = {
             Name: 'email',
             Value: email,
         };
+        const dataName = {
+            Name: 'name',
+            Value: name,
+        };
         const attributeEmail = new AmazonCognitoIdentity.CognitoUserAttribute(dataEmail);
+        const attributeName = new AmazonCognitoIdentity.CognitoUserAttribute(dataName);
 
         attributeList.push(attributeEmail);
+        attributeList.push(attributeName);
 
         userPool.signUp(email, password, attributeList, null, function signUpCallback(err, result) {
             if (!err) {
@@ -109,7 +117,7 @@ var AuthApp = window.AuthApp || {};
      *  Event Handlers
      */
     document.addEventListener("DOMContentLoaded", () => {
-        const registerForm = document.getElementById("registrationForm");
+        const registerForm = document.getElementById("registerForm");
         const signinForm = document.getElementById("signinForm");
         const verifyForm = document.getElementById("verifyForm");
 
@@ -129,9 +137,10 @@ var AuthApp = window.AuthApp || {};
     function handleRegister(event) {
         event.preventDefault();
 
-        const email = document.getElementById("emailInputRegister").value;
-        const password = document.getElementById("passwordInputRegister").value;
-        const password2 = document.getElementById("password2InputRegister").value;
+        const name = document.getElementById("name").value.trim();
+        const email = document.getElementById("email").value.trim();
+        const password = document.getElementById("password").value;
+        const password2 = document.getElementById("confirmPassword").value;
 
         if (password !== password2) {
             alert("Passwords do not match.");
@@ -141,10 +150,11 @@ var AuthApp = window.AuthApp || {};
         register(
             email,
             password,
+            name,
             function registerSuccess(result) {
                 console.log("Registration successful. Please verify your email.");
                 alert("Registration successful. Please check your email for a verification code.");
-                window.location.href = "/verify.html";
+                window.location.href = verifyUrl;
             },
             function registerFailure(err) {
                 alert(err.message || JSON.stringify(err));
@@ -155,8 +165,8 @@ var AuthApp = window.AuthApp || {};
     function handleSignin(event) {
         event.preventDefault();
 
-        const email = document.getElementById("emailInputSignin").value;
-        const password = document.getElementById("passwordInputSignin").value;
+        const email = document.getElementById("email").value.trim();
+        const password = document.getElementById("password").value;
 
         signin(
             email,
@@ -164,7 +174,7 @@ var AuthApp = window.AuthApp || {};
             function signinSuccess() {
                 console.log("Successfully logged in.");
                 alert("Login successful!");
-                window.location.href = "/index.html"; // Redirect after login
+                window.location.href = dashboardUrl; // Redirect after login
             },
             function signinFailure(err) {
                 alert(err.message || JSON.stringify(err));
@@ -175,8 +185,8 @@ var AuthApp = window.AuthApp || {};
     function handleVerify(event) {
         event.preventDefault();
 
-        const email = document.getElementById("emailInputVerify").value;
-        const code = document.getElementById("codeInputVerify").value;
+        const email = document.getElementById("emailInputVerify").value.trim();
+        const code = document.getElementById("codeInputVerify").value.trim();
 
         verify(
             email,
@@ -184,7 +194,7 @@ var AuthApp = window.AuthApp || {};
             function verifySuccess() {
                 console.log("Verification successful.");
                 alert("Your account has been successfully verified! Redirecting to login page.");
-                window.location.href = "/signin.html";
+                window.location.href = signinUrl;
             },
             function verifyFailure(err) {
                 alert(err.message || JSON.stringify(err));
