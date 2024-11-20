@@ -38,6 +38,11 @@ document.addEventListener("DOMContentLoaded", () => {
         toggleRequirement(lowercaseRequirement, regex.lowercase.test(password));
     });
 
+    if (![numberRequirement, specialCharRequirement, uppercaseRequirement, lowercaseRequirement]
+    .every(req => req.classList.contains("valid"))) {
+    displayError("Password does not meet all requirements.");
+    return;
+    }
     // Submit handler
     registerForm.addEventListener("submit", (e) => {
         e.preventDefault();
