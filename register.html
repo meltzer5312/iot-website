@@ -5,24 +5,73 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Register - Smart Guardian</title>
-    <link rel="stylesheet" href="styles.css">
     <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@400;600&display=swap" rel="stylesheet">
-    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     <style>
+        body {
+            font-family: 'Source Sans Pro', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f4f4f4;
+            margin: 0;
+        }
+
+        .form-container {
+            background: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            width: 350px;
+        }
+
+        h1, h2 {
+            text-align: center;
+        }
+
+        h1 {
+            color: black;
+        }
+
+        h2 {
+            color: #e0501b;
+        }
+
+        .form-container input {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        .form-container button {
+            width: 100%;
+            padding: 10px;
+            background: #2f8be0;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .form-container button:hover {
+            background: #1d6fb8;
+        }
+
         .requirement-list {
             text-align: left;
             font-size: 0.9em;
             color: gray;
             margin-bottom: 10px;
         }
+
         .requirement-list li {
             display: flex;
             align-items: center;
             margin: 5px 0;
         }
-        .requirement-list li.valid {
-            color: green;
-        }
+
         .requirement-list li .icon {
             width: 20px;
             height: 20px;
@@ -31,77 +80,58 @@
             justify-content: center;
             align-items: center;
         }
+
         .requirement-list li .icon::before {
-            content: '❌'; /* Default icon */
+            content: '❌'; /* Default cross icon */
             color: red;
         }
+
         .requirement-list li.valid .icon::before {
-            content: '✔️'; /* Valid icon */
+            content: '✔️'; /* Tick icon when valid */
             color: green;
+        }
+
+        .error {
+            color: red;
+            font-size: 0.9em;
+            margin-bottom: 10px;
         }
     </style>
 </head>
 <body>
-    <div class="wrapper">
-        <!-- Registration Section -->
-        <div class="registration" style="text-align: center; padding: 50px 10%;">
-            <!-- Header Text -->
-            <div class="registration-header" style="margin-bottom: 30px;">
-                <h1 style="font-size: 2.5em; color: black;">Register Now</h1>
-                <h2 style="font-size: 2em; color: #e0501b;">Join Us Today</h2>
-                <p>Create an account and take care of your loved ones wherever you are.</p>
-            </div>
+    <div class="form-container">
+        <h1>Register Now</h1>
+        <h2>Join Us Today</h2>
+        <p>Create an account and take care of your loved ones wherever you are.</p>
 
-            <!-- Form Container -->
-            <div class="form-container" style="margin: 0 auto; max-width: 400px;" data-aos="fade-up" data-aos-duration="1000">
-                <form id="registerForm">
-                    <div id="errorMessage" class="error" style="color: red; margin-bottom: 10px;"></div>
-                    
-                    <!-- Name Field -->
-                    <input type="text" id="name" placeholder="Enter your name" required style="width: 100%; padding: 10px; margin: 10px 0; border: 1px solid #ccc; border-radius: 5px;">
-                    
-                    <!-- Email Field -->
-                    <input type="email" id="email" placeholder="Enter your email" required style="width: 100%; padding: 10px; margin: 10px 0; border: 1px solid #ccc; border-radius: 5px;">
-                    
-                    <!-- Password Field -->
-                    <input type="password" id="password" placeholder="Enter your password" required style="width: 100%; padding: 10px; margin: 10px 0; border: 1px solid #ccc; border-radius: 5px;">
-                    
-                    <!-- Confirm Password Field -->
-                    <input type="password" id="confirmPassword" placeholder="Confirm your password" required style="width: 100%; padding: 10px; margin: 10px 0; border: 1px solid #ccc; border-radius: 5px;">
+        <form id="registerForm">
+            <div id="errorMessage" class="error"></div>
+            
+            <!-- Name Field -->
+            <input type="text" id="name" placeholder="Enter your name" required>
+            
+            <!-- Email Field -->
+            <input type="email" id="email" placeholder="Enter your email" required>
+            
+            <!-- Password Field -->
+            <input type="password" id="password" placeholder="Enter your password" required>
+            
+            <!-- Confirm Password Field -->
+            <input type="password" id="confirmPassword" placeholder="Confirm your password" required>
 
-                    <!-- Password Requirements -->
-                    <ul class="requirement-list" id="passwordRequirements">
-                        <li id="numberRequirement"><span class="icon"></span>Contains at least 1 number</li>
-                        <li id="specialCharRequirement"><span class="icon"></span>Contains at least 1 special character</li>
-                        <li id="uppercaseRequirement"><span class="icon"></span>Contains at least 1 uppercase letter</li>
-                        <li id="lowercaseRequirement"><span class="icon"></span>Contains at least 1 lowercase letter</li>
-                    </ul>
+            <!-- Password Requirements -->
+            <ul class="requirement-list" id="passwordRequirements">
+                <li id="numberRequirement"><span class="icon"></span> Contains at least 1 number</li>
+                <li id="specialCharRequirement"><span class="icon"></span> Contains at least 1 special character</li>
+                <li id="uppercaseRequirement"><span class="icon"></span> Contains at least 1 uppercase letter</li>
+                <li id="lowercaseRequirement"><span class="icon"></span> Contains at least 1 lowercase letter</li>
+            </ul>
 
-                    <!-- Submit Button -->
-                    <button type="submit" style="width: 100%; padding: 10px; background: #2f8be0; color: white; border: none; border-radius: 5px; cursor: pointer;">
-                        Register
-                    </button>
-                </form>
-            </div>
-        </div>
-
-        <!-- Footer -->
-        <div class="footer" style="margin-top: 50px;">
-            <h2>HealthCare.</h2>
-            <div class="footerlinks">
-                <a href="#" class="mainlink">Corona Updates</a>
-                <a href="#">Help</a>
-                <a href="#">About</a>
-                <a href="#">Contact</a>
-            </div>
-        </div>
+            <!-- Submit Button -->
+            <button type="submit">Register</button>
+        </form>
     </div>
 
-    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-    <script src="config.js"></script>
     <script src="register.js"></script>
-    <script>
-        AOS.init();
-    </script>
 </body>
 </html>
