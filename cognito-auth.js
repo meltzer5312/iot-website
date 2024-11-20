@@ -154,7 +154,7 @@ var AuthApp = window.AuthApp || {};
             function registerSuccess(result) {
                 console.log("Registration successful. Please verify your email.");
                 alert("Registration successful. Please check your email for a verification code.");
-                window.location.href = verifyUrl;
+                window.location.href = "/verify.html";
             },
             function registerFailure(err) {
                 alert(err.message || JSON.stringify(err));
