@@ -1,54 +1,106 @@
 document.addEventListener("DOMContentLoaded", () => {
-    // Load Cognito configuration
+    const passwordInput = document.getElementById("password");
+    const confirmPasswordInput = document.getElementById("confirmPassword");
+    const emailInput = document.getElementById("email");
+    const nameInput = document.getElementById("name");
+    const errorMessage = document.getElementById("errorMessage");
+    const registerForm = document.getElementById("registerForm");
+
+    // Password requirement elements
+    const numberRequirement = document.getElementById("numberRequirement");
+    const specialCharRequirement = document.getElementById("specialCharRequirement");
+    const uppercaseRequirement = document.getElementById("uppercaseRequirement");
+    const lowercaseRequirement = document.getElementById("lowercaseRequirement");
+
+    // Password validation regex
+    const regex = {
+        number: /\d/,
+        specialChar: /[!@#$%^&*(),.?":{}|<>]/,
+        uppercase: /[A-Z]/,
+        lowercase: /[a-z]/,
+    };
+
+    // AWS Cognito Configuration
     const cognitoConfig = window.config.cognito;
 
-    // Check if using Amazon Cognito Identity SDK via CDN
-    const AmazonCognitoIdentity = window.AmazonCognitoIdentity;
+    const userPool = new AmazonCognitoIdentity.CognitoUserPool({
+        UserPoolId: cognitoConfig.userPoolId,
+        ClientId: cognitoConfig.userPoolClientId,
+    });
 
-    // Get form and input elements
-    const registerForm = document.getElementById("registerForm");
-    const emailInput = document.getElementById("email");
-    const passwordInput = document.getElementById("password");
-    const errorMessage = document.getElementById("errorMessage");
+    // Update password requirement validation dynamically
+    passwordInput.addEventListener("input", () => {
+        const password = passwordInput.value;
 
-    // Handle form submission
+        toggleRequirement(numberRequirement, regex.number.test(password));
+        toggleRequirement(specialCharRequirement, regex.specialChar.test(password));
+        toggleRequirement(uppercaseRequirement, regex.uppercase.test(password));
+        toggleRequirement(lowercaseRequirement, regex.lowercase.test(password));
+    });
+
+    // Submit handler
     registerForm.addEventListener("submit", (e) => {
-        e.preventDefault(); // Prevent form from reloading
+        e.preventDefault();
 
+        const password = passwordInput.value;
+        const confirmPassword = confirmPasswordInput.value;
         const email = emailInput.value.trim();
-        const password = passwordInput.value.trim();
+        const name = nameInput.value.trim();
 
-        // Basic validation
-        if (!email || !password) {
-            displayError("All fields are required.");
-            return;
-        }
-        if (password.length < 6) {
-            displayError("Password must be at least 6 characters long.");
+        // Check if all requirements are met
+        if (![numberRequirement, specialCharRequirement, uppercaseRequirement, lowercaseRequirement]
+            .every(req => req.classList.contains("valid"))) {
+            displayError("Password does not meet all requirements.");
             return;
         }
 
-        // Define Cognito User Pool
-        const userPool = new AmazonCognitoIdentity.CognitoUserPool({
-            UserPoolId: cognitoConfig.userPoolId,
-            ClientId: cognitoConfig.userPoolClientId,
-        });
+        // Check if passwords match
+        if (password !== confirmPassword) {
+            displayError("Passwords do not match.");
+            return;
+        }
 
-        // Register the user
-        userPool.signUp(email, password, [], null, (err, result) => {
+        // Clear error and proceed with Cognito registration
+        errorMessage.textContent = "";
+
+        // AWS Cognito User Registration
+        const attributeList = [];
+        const dataEmail = {
+            Name: 'email',
+            Value: email,
+        };
+        const dataName = {
+            Name: 'name',
+            Value: name,
+        };
+
+        attributeList.push(new AmazonCognitoIdentity.CognitoUserAttribute(dataEmail));
+        attributeList.push(new AmazonCognitoIdentity.CognitoUserAttribute(dataName));
+
+        userPool.signUp(email, password, attributeList, null, (err, result) => {
             if (err) {
-                console.error("Error registering user:", err.message);
+                console.error("Error during sign-up:", err.message);
                 displayError(err.message);
                 return;
             }
 
-            console.log("User registered successfully:", result.user.getUsername());
-            alert("Registration successful! Please confirm your email.");
-            registerForm.reset(); // Clear the form
+            const cognitoUser = result.user;
+            console.log("User registration successful:", cognitoUser.getUsername());
+            alert("Registration successful! Please check your email for verification.");
+            registerForm.reset();
         });
     });
 
-    // Helper function to display error messages
+    // Toggle requirement validity
+    function toggleRequirement(element, isValid) {
+        if (isValid) {
+            element.classList.add("valid");
+        } else {
+            element.classList.remove("valid");
+        }
+    }
+
+    // Display error messages
     function displayError(message) {
         errorMessage.textContent = message;
     }
