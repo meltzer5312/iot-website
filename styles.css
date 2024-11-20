@@ -79,8 +79,8 @@ html,body{
 
 /* Button styles */
 .landingText .btn {
-    width: 150px; /* Fixed width for uniform button size */
-    padding: 16px 0; /* Vertical padding only */
+    width: 140px; /* Fixed width for uniform button size */
+    padding: 15px 0; /* Vertical padding only */
     background-color: #2f8be0; /* Blue background */
     border-radius: 45px; /* Fully rounded edges */
     text-align: center;
