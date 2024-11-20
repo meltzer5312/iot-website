@@ -114,6 +114,31 @@ var AuthApp = window.AuthApp || {};
     }
 
     /*
+     * Password Validation
+     */
+    function validatePassword(password) {
+        const requirements = {
+            hasNumber: /\d/.test(password),
+            hasSpecialChar: /[!@#$%^&*(),.?":{}|<>]/.test(password),
+            hasUpperCase: /[A-Z]/.test(password),
+            hasLowerCase: /[a-z]/.test(password),
+            isLongEnough: password.length >= 8,
+        };
+
+        const errors = [];
+        if (!requirements.hasNumber) errors.push("Password must contain at least one number.");
+        if (!requirements.hasSpecialChar) errors.push("Password must contain at least one special character.");
+        if (!requirements.hasUpperCase) errors.push("Password must contain at least one uppercase letter.");
+        if (!requirements.hasLowerCase) errors.push("Password must contain at least one lowercase letter.");
+        if (!requirements.isLongEnough) errors.push("Password must be at least 8 characters long.");
+
+        return {
+            isValid: Object.values(requirements).every(Boolean),
+            errors,
+        };
+    }
+
+    /*
      *  Event Handlers
      */
     document.addEventListener("DOMContentLoaded", () => {
@@ -141,6 +166,14 @@ var AuthApp = window.AuthApp || {};
         const email = document.getElementById("email").value.trim();
         const password = document.getElementById("password").value;
         const password2 = document.getElementById("confirmPassword").value;
+
+        // Validate passwords
+        const { isValid, errors } = validatePassword(password);
+
+        if (!isValid) {
+            alert(`Password does not meet requirements:\n- ${errors.join("\n- ")}`);
+            return;
+        }
 
         if (password !== password2) {
             alert("Passwords do not match.");
