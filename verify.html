@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Email Verification</title>
+    <style>
+        body {
+            font-family: 'Source Sans Pro', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f4f4f4;
+        }
+        .container {
+            text-align: center;
+            background: #fff;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            color: #2f8be0;
+            margin-bottom: 20px;
+        }
+        p {
+            color: #333;
+            font-size: 1.1em;
+            margin-bottom: 20px;
+        }
+        .info {
+            font-size: 0.9em;
+            color: gray;
+        }
+        button {
+            padding: 10px 20px;
+            background-color: #2f8be0;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 1em;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #1d6fb8;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Email Verification</h1>
+        <p>We have sent a verification link to your email address. Please check your inbox and click on the link to verify your account.</p>
+        <p class="info">If you did not receive the email, check your spam folder or click the button below to resend the verification email.</p>
+        <button onclick="resendVerification()">Resend Email</button>
+    </div>
+    <script>
+        function resendVerification() {
+            alert("Verification email has been resent. Please check your inbox.");
+            // Implement API or logic to trigger resend email via AWS Cognito if needed
+        }
+    </script>
+</body>
+</html>
