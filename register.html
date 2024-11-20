@@ -37,22 +37,26 @@
             color: #e0501b;
         }
 
+        /* Input fields styling */
         .form-container input {
-            width: 90%;
+            width: 100%; /* Ensures the input fields take up the full width of their container */
             padding: 10px;
             margin: 10px 0;
             border: 1px solid #ccc;
             border-radius: 5px;
+            box-sizing: border-box; /* Includes padding and border in the total width */
         }
-
+        
+        /* Button styling */
         .form-container button {
-            width: 100%;
+            width: 100%; /* Matches the width of the input fields */
             padding: 10px;
             background: #2f8be0;
             color: white;
             border: none;
             border-radius: 5px;
             cursor: pointer;
+            box-sizing: border-box; /* Consistent sizing with the input fields */
         }
 
         .form-container button:hover {
