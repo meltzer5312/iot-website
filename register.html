@@ -55,16 +55,16 @@
     <script>
         // Password validation script
         document.addEventListener("DOMContentLoaded", () => {
-            const passwordInput = document.getElementById("passwordInputRegister");
-            const confirmPasswordInput = document.getElementById("password2InputRegister");
-            const registerForm = document.getElementById("registrationForm");
-            const errorMessage = document.getElementById("errorMessage");
-
-            // Password requirement elements
-            const numberRequirement = document.getElementById("numberRequirement");
-            const specialCharRequirement = document.getElementById("specialCharRequirement");
-            const uppercaseRequirement = document.getElementById("uppercaseRequirement");
-            const lowercaseRequirement = document.getElementById("lowercaseRequirement");
+        const passwordInput = document.getElementById("password");
+        const confirmPasswordInput = document.getElementById("confirmPassword");
+        const registerForm = document.getElementById("registerForm");
+        const errorMessage = document.getElementById("errorMessage");
+    
+        // Password requirement elements
+        const numberRequirement = document.getElementById("numberRequirement");
+        const specialCharRequirement = document.getElementById("specialCharRequirement");
+        const uppercaseRequirement = document.getElementById("uppercaseRequirement");
+        const lowercaseRequirement = document.getElementById("lowercaseRequirement");
 
             // Regular expressions for validation
             const regex = {
